@@ -1,36 +1,28 @@
-FROM ubuntu
+FROM python:3.6
 
 # Set the working directory
-RUN mkdir -p /home/ubuntu/smsmagicportal
-WORKDIR /home/ubuntu
+RUN mkdir -p /home/root/smsmagicportal
+WORKDIR /home/root/smsmagicportal
 
 # Clone the Git repository
-RUN git clone https://github.com/screenmagicthiru/test-incominghandler.git /home/ubuntu/smsmagicportal
+RUN git clone git@github.com:screenmagicthiru/test-incominghandler.git /home/root/smsmagicportal
 
 # Create a virtual environment
-RUN mkdir -p /home/ubuntu/virt/incoming_handler3/
-RUN python -m venv /home/ubuntu/virt/incoming_handler3/
-RUN /home/ubuntu/virt/incoming_handler3/bin/pip install --upgrade pip
+RUN mkdir -p /home/root/virt/incoming_handler3/
+RUN python -m venv /home/root/virt/incoming_handler3/
+RUN /home/root/virt/incoming_handler3/bin/pip install --upgrade pip
 
 # Copy the project files to the working directory
-COPY . /home/ubuntu/smsmagicportal/IncomingSMSHandler
-# virtual env setup
-RUN apt-get update && \
-    apt-get install -y supervisor && \
-    apt-get install -y python3-venv \
-
-RUN mkdir -p /home/usher/virt/incoming_handler3/
-RUN virtualenv -p python3 ~/virt/incoming_handler3
-RUN source /home/usher/virt/incoming_handler3/bin/activate
+COPY . /home/root/smsmagicportal/IncomingSMSHandler
 
 # Install the project dependencies
-RUN /home/ubuntu/virt/incoming_handler3/bin/pip install -r /home/ubuntu/smsmagicportal/IncomingSMSHandler/requirements.txt
+RUN /home/root/virt/incoming_handler3/bin/pip install -r /home/root/smsmagicportal/IncomingSMSHandler/requirements.txt
 
 # Set up the supervisor configuration
 COPY incomingsms_handler.conf /etc/supervisor/conf.d/
 
 # Create log directories
-RUN mkdir -p /home/ubuntu/logs/IncomingSMSHandler/
+RUN mkdir -p /home/root/logs/IncomingSMSHandler/
 RUN mkdir -p /extra-01/logs/IncomingSMSHandler/
 
 # Start the supervisor service
