@@ -17,7 +17,6 @@ COPY . /home/ubuntu/smsmagicportal/IncomingSMSHandler
 # virtual env setup
 RUN apt-get update && \
     apt-get install -y supervisor && \
-    apt-get install -y git && \
     apt-get install -y python3-venv \
 
 RUN mkdir -p /home/usher/virt/incoming_handler3/
