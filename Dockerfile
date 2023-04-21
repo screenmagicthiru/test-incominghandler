@@ -5,7 +5,7 @@ RUN mkdir -p /home/root/smsmagicportal
 WORKDIR /home/root/smsmagicportal
 
 # Clone the Git repository
-RUN git clone git@github.com:screenmagicthiru/test-incominghandler.git /home/root/smsmagicportal
+RUN git clone https://git@github.com:screenmagicthiru/test-incominghandler.git /home/root/smsmagicportal
 
 # Create a virtual environment
 RUN mkdir -p /home/root/virt/incoming_handler3/
