@@ -19,7 +19,6 @@ jmespath==0.10.0
 kombu==5.1.0
 lxml==4.9.1
 mysqlclient==2.1.0
-
 prompt-toolkit==3.0.32
 pynamodb==4.3.3
 python-dateutil==2.8.2
